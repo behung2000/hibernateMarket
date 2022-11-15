@@ -22,6 +22,7 @@ public class Menu extends JFrame{
         setResizable(false);
 
         setUpKHButton();
+        setUpNhapHangButton();
     }
 
     private void setUpKHButton() {
@@ -29,6 +30,15 @@ public class Menu extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 CustomersGui customersGui = new CustomersGui();
+            }
+        });
+    }
+
+    private void setUpNhapHangButton(){
+        nhapHangButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                NhapHangGui nhapHangGui = new NhapHangGui();
             }
         });
     }

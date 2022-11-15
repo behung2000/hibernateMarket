@@ -38,5 +38,12 @@ public class VegetableBLL {
         }
         return obj;
   }
-    
+
+    public List<Vegetable> getList() {
+      return vegDAL.getList();
+    }
+
+    public List<Vegetable> getListWithCategory(Integer id) {
+      return vegDAL.getVegetableInCategory(id);
+    }
 }

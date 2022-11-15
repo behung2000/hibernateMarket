@@ -49,4 +49,11 @@ public class VegetableDAL {
     {
         session.delete(obj);
     }
+
+    public List<Vegetable> getList() {
+        session.beginTransaction();
+        List<Vegetable> list = session.createQuery("FROM Vegetable ORDER BY id ASC", Vegetable.class).list();
+        session.getTransaction().commit();
+        return list;
+    }
 }
