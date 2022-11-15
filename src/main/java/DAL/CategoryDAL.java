@@ -1,7 +1,8 @@
-package hibernatebanhang.DAL;
+package DAL;
+
+import org.hibernate.Session;
 
 import java.util.List;
-import org.hibernate.Session;
 
 public class CategoryDAL {
 

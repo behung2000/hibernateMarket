@@ -1,8 +1,8 @@
 
 package BLL;
 
-import hibernatebanhang.DAL.Category;
-import hibernatebanhang.DAL.CategoryDAL;
+import DAL.Category;
+import DAL.CategoryDAL;
 
 import java.util.List;
 

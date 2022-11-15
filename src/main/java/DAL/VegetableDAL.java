@@ -1,8 +1,9 @@
-package hibernatebanhang.DAL;
+package DAL;
 
-import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+
+import java.util.List;
 
 public class VegetableDAL {
     

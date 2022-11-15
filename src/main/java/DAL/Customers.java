@@ -1,15 +1,23 @@
-package hibernatebanhang.DAL;
+package DAL;
 
 import com.google.gson.Gson;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @Entity
 @Table
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customers {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "CustomerID")
     private int customerId;

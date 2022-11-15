@@ -4,8 +4,9 @@
  */
 package BLL;
 
-import hibernatebanhang.DAL.Vegetable;
-import hibernatebanhang.DAL.VegetableDAL;
+import DAL.Vegetable;
+import DAL.VegetableDAL;
+
 import java.util.List;
 
 /**
