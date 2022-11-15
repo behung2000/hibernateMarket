@@ -1,6 +1,7 @@
-package hibernatebanhang.DAL;
+package DAL;
 
 import lombok.Data;
+
 import javax.persistence.*;
 import java.sql.Date;
 

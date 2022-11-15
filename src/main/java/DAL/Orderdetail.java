@@ -1,6 +1,7 @@
-package hibernatebanhang.DAL;
+package DAL;
 
 import lombok.Data;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
