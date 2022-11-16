@@ -2,43 +2,67 @@ package DAL;
 
 import org.hibernate.Session;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class CategoryDAL {
 
-    Session session;
+    private Session session;
 
     public CategoryDAL() {
+    }
+
+    private void openSession() {
         session = HibernateUtils.getSessionFactory().openSession();
+        session.beginTransaction();
+    }
+
+    private void closeSession() {
+        session.getTransaction().commit();
+        session.close();
     }
 
     public List loadCategory() {
         List<Category> category;
-        session.beginTransaction();
+        openSession();
         category = session.createQuery("FROM Category", Category.class).list();
-        session.getTransaction().commit();
+        closeSession();
         return category;
 
     }
     public Category getCategory(int CategoryID)
     {
+        openSession();
         Category c = session.get(Category.class, CategoryID);
+        closeSession();
         return c;
     }
     public void addCategory(Category c)
     {
-       
+        openSession();
         session.save(c);
-        
+        closeSession();
     }
     public void updateCategory(Category c)
     {
+        openSession();
         session.update(c);
-        
-    }
-    public void deleteCategory(Category c)
-    {
-        session.delete(c);
+        closeSession();
     }
 
+    public void deleteCategory(Category c)
+    {
+        openSession();
+        session.delete(c);
+        closeSession();
+    }
+
+    public void deleteVegetable(Vegetable vegetable) {
+        Category category = getCategory(vegetable.getCatagory().getCatagoryID());
+        category.getListVegetable().remove(vegetable);
+        openSession();
+        session.saveOrUpdate(category);
+        closeSession();
+    }
 }

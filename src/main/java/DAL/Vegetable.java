@@ -1,17 +1,19 @@
-
 package DAL;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-
-/**
- *
- * @author caothanh
- */
 @Data
 @Entity
 @Table
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+
 public class Vegetable {
     
     @Id
@@ -26,8 +28,9 @@ public class Vegetable {
     private String Image;
     @Column
     private Double Price;
-    
-    @ManyToOne
-    @JoinColumn(name="CatagoryID")
+
+    @ManyToOne()
+    @JsonBackReference
+    @JoinColumn(name="CatagoryID", nullable = false)
     private Category catagory;
 }

@@ -5,7 +5,7 @@
     <session-factory>
         <!-- Database setting -->
         <!-- SQL dialect -->
-        <property name="dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost:3306/Market</property>
         <property name="connection.username">root</property>
@@ -15,14 +15,14 @@
         <!-- Enable Hibernate's automatic session context management -->
         <property name="current_session_context_class">thread</property>
         <!-- Disable the second-level cache -->
-        <property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+        <property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>
         <!-- Show all executed SQL to console -->
         <property name="show_sql">true</property>
         <mapping class="DAL.Category" />
         <mapping class="DAL.Vegetable" />
         <mapping class="DAL.Customers" />
         <mapping class="DAL.Order" />
-        <!--mapping class="hibernatebanhang.DAL.Orderdetail" /-->
+        <!--mapping class="DAL.Orderdetail"/-->
         
     </session-factory>
 </hibernate-configuration>

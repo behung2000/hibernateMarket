@@ -14,10 +14,6 @@ import org.hibernate.service.ServiceRegistry;
 
 import java.util.List;
 
-/**
- *
- * @author caothanh
- */
 public class HibernateUtils {
     private static final SessionFactory SESSION_FACTORY = buildSessionFactory();
  

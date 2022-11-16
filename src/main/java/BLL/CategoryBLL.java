@@ -3,17 +3,14 @@ package BLL;
 
 import DAL.Category;
 import DAL.CategoryDAL;
+import DAL.Vegetable;
 
 import java.util.List;
 
-/**
- *
- * @author caothanh
- */
 public class CategoryBLL {
     
     private CategoryDAL cateDAL;
-    
+
     
     public CategoryBLL()
     {
@@ -28,7 +25,7 @@ public class CategoryBLL {
         return list;
     }
 
-    public Category[] convertList1 (List<Category> list)
+    public Category[] convertList(List<Category> list)
     {
         int rows = list.size();
         Category[] newList = new Category[rows];
@@ -40,29 +37,9 @@ public class CategoryBLL {
         return newList;
     }
 
-    public Object[][] convertList(List<Category> list)
-    {
-        int rows = list.size();
-        int cols = 4;
-        Object[][] obj = new Object[rows][cols];
-        for(int i = 0; i < rows; i++)
-        {
-            obj[i][0] = list.get(i).getCatagoryID();
-            obj[i][1] = list.get(i).getName();
-            obj[i][2] = list.get(i).getDescription();
-            obj[i][3] = list.get(i).getListVegetable().size();
-        }
-        return obj;
+    public void update(Category category) {
+        cateDAL.updateCategory(category);
     }
 
-    public void newCategory(Category c)
-    {
-        cateDAL.addCategory(c);
-    }
 
-    public Category getCategory(int CategoryID)
-    {
-        Category c = cateDAL.getCategory(CategoryID);
-        return c;
-    }
 }

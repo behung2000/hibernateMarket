@@ -1,49 +1,77 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package BLL;
 
 import DAL.Vegetable;
 import DAL.VegetableDAL;
+import GUI.Mess;
 
+import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author caothanh
- */
 public class VegetableBLL {
 
-  private  VegetableDAL vegDAL;
-  
-  public VegetableBLL()
-  {
-      vegDAL = new VegetableDAL();
-  }
-  
-  public Object[][] converVegetable(List<Vegetable> list)
-  {
-      int rows = list.size();
-        int cols = 6;
-        Object[][] obj = new Object[rows][cols];
-        for(int i = 0; i < rows; i++)
-        {
-            obj[i][0] = list.get(i).getVegetableID();
-            obj[i][1] = list.get(i).getVegetableName();
-            obj[i][2] = list.get(i).getUnit();
-            obj[i][3] = list.get(i).getAmount();
-            obj[i][4] = list.get(i).getImage();
-            obj[i][5] = list.get(i).getPrice();
+    private VegetableDAL vegetableDAL;
+    private Mess mess;
+
+    public VegetableBLL() {
+        vegetableDAL = new VegetableDAL();
+        mess = new Mess();
+    }
+
+    public List<Vegetable> getVegetableList() {
+        return vegetableDAL.getVegetableList();
+    }
+
+    public List<Vegetable> getListWithCategory(int catagoryID) {
+        return vegetableDAL.getVegetableList(catagoryID);
+    }
+
+    public List<Vegetable> getSearch(String textSearch, Integer select) {
+        List<Vegetable> vegetables = new ArrayList<>();
+        switch (select) {
+            case 0:
+                try {
+                    Vegetable vegetable = getVegetable(Integer.parseInt(textSearch));
+                    if (vegetable == null) {
+                        mess.message("Search vegetable with id", String.format("NOT FOUND VEGETABLE WITH ID %s", textSearch));
+                    }
+                    else {
+                        vegetables.add(vegetable);
+                    }
+                }
+                catch (NumberFormatException e) {
+                    mess.message("Search vegetable with id", String.format("id must be number %s", textSearch));
+                }
+                break;
+            case 1:
+                vegetables = getVegetableWithName(textSearch);
+                if (vegetables.isEmpty()) {
+                    mess.message("Search vegetable with name", String.format("NOT FOUND ANY VEGETABLE WITH NAME %s", textSearch));
+                }
+                break;
+            default:
+                mess.message("Search vegetable", String.format("Select ??? %s", select));
+
         }
-        return obj;
-  }
-
-    public List<Vegetable> getList() {
-      return vegDAL.getList();
+        return vegetables;
     }
 
-    public List<Vegetable> getListWithCategory(Integer id) {
-      return vegDAL.getVegetableInCategory(id);
+    private List<Vegetable> getVegetableWithName(String textSearch) {
+        return vegetableDAL.getVegetableListWithName(textSearch);
     }
+
+    private Vegetable getVegetable(Integer id) {
+        return vegetableDAL.getVegetable(id);
+    }
+
+    public void save(Vegetable vegetable) {
+        List<Vegetable> list = getVegetableList();
+        vegetable.setVegetableID(list.get(list.size()-1).getVegetableID()+1);
+        vegetableDAL.save(vegetable);
+    }
+
+    public void delete(Integer id) {
+        Vegetable vegetable = getVegetable(id);
+        vegetableDAL.delete(vegetable);
+    }
+
 }
