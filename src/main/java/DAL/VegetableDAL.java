@@ -3,50 +3,79 @@ package DAL;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VegetableDAL {
-    
-    Session session;
-    
-    public VegetableDAL()
-    {
+    private Session session;
+    private CategoryDAL categoryDAL;
+
+    public VegetableDAL() {
+        categoryDAL = new CategoryDAL();
+    }
+
+    private void openSession() {
         session = HibernateUtils.getSessionFactory().openSession();
-    }
-
-    public Vegetable getVegetable(int vegetableID)
-    {
-        Vegetable obj;
         session.beginTransaction();
-        obj = session.get(Vegetable.class, vegetableID);
+    }
+
+    private void closeSession() {
         session.getTransaction().commit();
-        return obj;
-        
+        session.close();
     }
 
-    public List getVegetableInCategory(int categoryID)
-    {
-        List list;
-        session.beginTransaction();
-        Query q = session.createQuery("FROM Vegetable WHERE CatagoryID = :categoryID");
-        q.setParameter("categoryID", categoryID);
-        list = q.list();
-        session.getTransaction().commit();
-        return list;
+    public List<Vegetable> getVegetableList() {
+        List<Vegetable> vegetables = new ArrayList<>();
+        openSession();
+        vegetables = session.createQuery("FROM Vegetable AS v ORDER BY v.id ASC", Vegetable.class).list();
+        closeSession();
+        return vegetables;
     }
 
-    public void addVegetable(Vegetable obj)
-    {
-        session.save(obj);
+    public List<Vegetable> getVegetableList(int catagoryID) {
+        List<Vegetable> vegetables = new ArrayList<>();
+        openSession();
+        Query query = session.createQuery("FROM Vegetable AS v WHERE v.catagory.id = :id ORDER BY v.id ASC", Vegetable.class);
+        query.setParameter("id", catagoryID);
+        vegetables = query.list();
+        closeSession();
+        return vegetables;
     }
 
-    public void updateVegetable(Vegetable obj)
-    {
-        session.update(obj);
+    public Vegetable getVegetable(Integer VegetableID) {
+        Vegetable vegetable = null;
+        openSession();
+        vegetable = session.get(Vegetable.class, VegetableID);
+        closeSession();
+        return vegetable;
     }
 
-    public void deleteVegetable(Vegetable obj)
-    {
-        session.delete(obj);
+    public List<Vegetable> getVegetableListWithName(String name) {
+        List<Vegetable> vegetables = new ArrayList<>();
+        openSession();
+        Query query = session.createQuery("FROM Vegetable AS v WHERE v.VegetableName like CONCAT('%',:name,'%') ORDER BY v.id ASC", Vegetable.class);
+        query.setParameter("name", name);
+        vegetables = query.list();
+        closeSession();
+        return vegetables;
+    }
+
+    public void save(Vegetable vegetable) {
+        openSession();
+        session.save(vegetable);
+        closeSession();
+    }
+
+    public void delete(Vegetable vegetable) {
+        //categoryDAL.deleteVegetable(vegetable);
+        openSession();
+        session.delete(vegetable);
+        closeSession();
+    }
+
+    public void update(Vegetable vegetable) {
+        openSession();
+        session.update(vegetable);
+        closeSession();
     }
 }

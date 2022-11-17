@@ -9,9 +9,11 @@ import java.util.List;
 
 public class CustomersBLL {
     private CustomersDAL customersDAL;
+    private Mess mess = new Mess();
 
     public CustomersBLL() {
         customersDAL = new CustomersDAL();
+        mess = new Mess();
     }
 
     public List<Customers> getList() {
@@ -27,7 +29,6 @@ public class CustomersBLL {
     public void updateCustomers(Customers obj) {
         Customers customers = getCustomers(obj.getCustomerId());
         if (customers == null) {
-            Mess mess = new Mess();
             mess.message("Update customers", "No found customer id to Update");
         }
         else {
@@ -42,7 +43,6 @@ public class CustomersBLL {
     public void deleteCustomers(Integer id) {
         Customers customers = getCustomers(id);
         if (customers == null) {
-            Mess mess = new Mess();
             mess.message("Delete customers", "No found customer id to delete");
         }
         else {
@@ -52,7 +52,6 @@ public class CustomersBLL {
 
     public List<Customers> searchCustomers(String search, Integer select) {
         List<Customers> customersList = new ArrayList<>();
-        Mess mess = new Mess();
         switch (select) {
             case 0:
                 try {

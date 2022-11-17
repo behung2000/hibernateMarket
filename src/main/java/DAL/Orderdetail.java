@@ -1,14 +1,17 @@
 package DAL;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Orderdetail {
     @Column(name = "OrderID")
     private int orderId;

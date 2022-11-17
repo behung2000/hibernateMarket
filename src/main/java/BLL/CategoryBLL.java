@@ -3,21 +3,21 @@ package BLL;
 
 import DAL.Category;
 import DAL.CategoryDAL;
+import DAL.Vegetable;
+import GUI.Mess;
 
 import java.util.List;
 
-/**
- *
- * @author caothanh
- */
 public class CategoryBLL {
     
     private CategoryDAL cateDAL;
-    
+
+    private Mess mess;
     
     public CategoryBLL()
     {
         cateDAL = new CategoryDAL();
+        mess = new Mess();
     }
     
     public List loadCategory()
@@ -28,7 +28,7 @@ public class CategoryBLL {
         return list;
     }
 
-    public Category[] convertList1 (List<Category> list)
+    public Category[] convertList(List<Category> list)
     {
         int rows = list.size();
         Category[] newList = new Category[rows];
@@ -40,29 +40,19 @@ public class CategoryBLL {
         return newList;
     }
 
-    public Object[][] convertList(List<Category> list)
-    {
-        int rows = list.size();
-        int cols = 4;
-        Object[][] obj = new Object[rows][cols];
-        for(int i = 0; i < rows; i++)
-        {
-            obj[i][0] = list.get(i).getCatagoryID();
-            obj[i][1] = list.get(i).getName();
-            obj[i][2] = list.get(i).getDescription();
-            obj[i][3] = list.get(i).getListVegetable().size();
+    public void update(Category category) {
+        cateDAL.updateCategory(category);
+    }
+
+    public Category getCategory(int categoryID) {
+        return cateDAL.getCategory(categoryID);
+    }
+
+    public Category getCategoryWithName(String name) {
+        Category category = cateDAL.getCategoryWithName(name);
+        if (category == null) {
+            mess.message("search category with name", String.format("Not found with name %s", name));
         }
-        return obj;
-    }
-
-    public void newCategory(Category c)
-    {
-        cateDAL.addCategory(c);
-    }
-
-    public Category getCategory(int CategoryID)
-    {
-        Category c = cateDAL.getCategory(CategoryID);
-        return c;
+        return category;
     }
 }
