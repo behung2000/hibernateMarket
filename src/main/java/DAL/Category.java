@@ -1,20 +1,21 @@
 package DAL;
 
-
-import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Parent;
 
 
 @Data
 @Entity
-@Table
-@NamedQuery(
-        name = "findAll.Vegetable",
-        query = "SELECT distinct v FROM Category AS c INNER JOIN Vegetable AS v ON v.catagory.CatagoryID = c.id ORDER BY v.id ASC"
-)
+@Table(name = "category")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Category {
 
     @Id
@@ -24,8 +25,9 @@ public class Category {
     @Column
     private String Description;
 
+
     @JsonManagedReference
-    @OneToMany(mappedBy = "catagory", cascade = CascadeType.ALL, orphanRemoval=true)
+    @OneToMany(mappedBy = "catagory")
     private Set<Vegetable> listVegetable;
 
     @Override

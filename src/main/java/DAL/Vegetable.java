@@ -9,11 +9,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table
+@Table(name = "vegetable")
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Vegetable {
     
     @Id
@@ -29,7 +28,13 @@ public class Vegetable {
     @Column
     private Double Price;
 
-    @ManyToOne()
+    /*
+    @Column
+    private int CatagoryID;
+     */
+
+
+    @ManyToOne
     @JsonBackReference
     @JoinColumn(name="CatagoryID", nullable = false)
     private Category catagory;

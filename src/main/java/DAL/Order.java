@@ -15,7 +15,6 @@ import java.sql.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "OrderID")
     private int orderId;

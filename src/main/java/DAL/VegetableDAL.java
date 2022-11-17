@@ -67,11 +67,15 @@ public class VegetableDAL {
     }
 
     public void delete(Vegetable vegetable) {
-        /*
+        //categoryDAL.deleteVegetable(vegetable);
         openSession();
         session.delete(vegetable);
         closeSession();
-         */
-        categoryDAL.deleteVegetable(vegetable);
+    }
+
+    public void update(Vegetable vegetable) {
+        openSession();
+        session.update(vegetable);
+        closeSession();
     }
 }

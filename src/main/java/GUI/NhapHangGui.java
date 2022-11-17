@@ -84,7 +84,7 @@ public class NhapHangGui extends JFrame{
                     Double price = Double.parseDouble(table1.getModel().getValueAt(row, 6).toString());
 
                     textField1.setText(name);
-                    categoryCombobox.setSelectedItem(nameCategory);
+                    categoryCombobox.getModel().setSelectedItem(nameCategory);
                     unitComboBox.setSelectedItem(unit);
                     textField2.setText(String.format("%s", amount));
                     textField3.setText(image);
@@ -135,8 +135,13 @@ public class NhapHangGui extends JFrame{
         vegetablesWithCategoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Category s = (Category) categoryCombobox.getModel().getSelectedItem();
-                table1.setModel(toTableModel(vegetableBLL.getListWithCategory(s.getCatagoryID())));
+                try {
+                    Category s = (Category) categoryCombobox.getModel().getSelectedItem();
+                    table1.setModel(toTableModel(vegetableBLL.getListWithCategory(s.getCatagoryID())));
+                }
+                catch (ClassCastException ex) {
+                    mess.message("Vegetables with category", "againt choose combobox category !!!");
+                }
             }
         });
     }
@@ -171,7 +176,7 @@ public class NhapHangGui extends JFrame{
 
     private Vegetable getTextField() {
         String name = textField1.getText();
-        Category category = (Category) categoryCombobox.getModel().getSelectedItem();
+        String category = categoryCombobox.getModel().getSelectedItem().toString();
         String unit = unitComboBox.getSelectedItem().toString();
         Integer amount = null;
         String image = textField3.getText();
@@ -199,7 +204,7 @@ public class NhapHangGui extends JFrame{
         }
         return Vegetable.builder()
             .VegetableName(name)
-            .catagory(category)
+            .catagory(categoryBLL.getCategoryWithName(category))
             .Unit(unit)
             .Amount(amount)
             .Image(image)
@@ -244,6 +249,14 @@ public class NhapHangGui extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
 
+                Integer row = table1.getSelectedRow();
+                if (row != null && row > -1) {
+                    Vegetable vegetable = getTextField();
+                    Integer id = Integer.parseInt(table1.getModel().getValueAt(row,0).toString());
+                    vegetable.setVegetableID(id);
+                    vegetableBLL.update(vegetable);
+                    setUpData();
+                }
             }
         });
     }

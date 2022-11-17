@@ -1,6 +1,7 @@
 package DAL;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.util.HashSet;
 import java.util.List;
@@ -58,11 +59,28 @@ public class CategoryDAL {
         closeSession();
     }
 
+    public Category getCategoryWithName(String name) {
+        Category category = null;
+        openSession();
+        Query query = session.createQuery("FROM Category AS c WHERE c.Name = :name", Category.class);
+        query.setParameter("name", name);
+        category = (Category) query.getSingleResult();
+        closeSession();
+        return category;
+    }
+
+
+    /*
     public void deleteVegetable(Vegetable vegetable) {
         Category category = getCategory(vegetable.getCatagory().getCatagoryID());
-        category.getListVegetable().remove(vegetable);
-        openSession();
-        session.saveOrUpdate(category);
-        closeSession();
+        Set<Vegetable> vegetables = category.getListVegetable();
+        if (vegetable != null) {
+            openSession();
+            vegetables.remove(vegetable);
+            closeSession();
+            System.out.println("Success");
+        }
     }
+     */
+
 }

@@ -4,6 +4,7 @@ package BLL;
 import DAL.Category;
 import DAL.CategoryDAL;
 import DAL.Vegetable;
+import GUI.Mess;
 
 import java.util.List;
 
@@ -11,10 +12,12 @@ public class CategoryBLL {
     
     private CategoryDAL cateDAL;
 
+    private Mess mess;
     
     public CategoryBLL()
     {
         cateDAL = new CategoryDAL();
+        mess = new Mess();
     }
     
     public List loadCategory()
@@ -41,5 +44,15 @@ public class CategoryBLL {
         cateDAL.updateCategory(category);
     }
 
+    public Category getCategory(int categoryID) {
+        return cateDAL.getCategory(categoryID);
+    }
 
+    public Category getCategoryWithName(String name) {
+        Category category = cateDAL.getCategoryWithName(name);
+        if (category == null) {
+            mess.message("search category with name", String.format("Not found with name %s", name));
+        }
+        return category;
+    }
 }

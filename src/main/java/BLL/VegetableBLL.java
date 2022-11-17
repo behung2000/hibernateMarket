@@ -74,4 +74,7 @@ public class VegetableBLL {
         vegetableDAL.delete(vegetable);
     }
 
+    public void update(Vegetable vegetable) {
+        vegetableDAL.update(vegetable);
+    }
 }
