@@ -17,7 +17,7 @@
         <mapping class="DAL.Vegetable" />
         <mapping class="DAL.Customers" />
         <mapping class="DAL.Order" />
-        <!--mapping class="DAL.Orderdetail"/-->
+        <mapping class="DAL.Orderdetail"/>
         
     </session-factory>
 </hibernate-configuration>

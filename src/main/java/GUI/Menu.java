@@ -6,9 +6,8 @@ import java.awt.event.ActionListener;
 
 public class Menu extends JFrame{
     private JButton nhapHangButton;
-    private JButton lapHoaDonButton;
     private JButton kHButton;
-    private JButton thốngKêButton;
+    private JButton thongKeButton;
     private JPanel jPanel1;
 
     public Menu() {
@@ -23,6 +22,7 @@ public class Menu extends JFrame{
 
         setUpKHButton();
         setUpNhapHangButton();
+        setUpThongKe();
     }
 
     private void setUpKHButton() {
@@ -39,6 +39,15 @@ public class Menu extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 NhapHangGui nhapHangGui = new NhapHangGui();
+            }
+        });
+    }
+
+    private void setUpThongKe() {
+        thongKeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }
