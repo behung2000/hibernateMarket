@@ -27,6 +27,7 @@ public class CustomersGui extends JFrame{
     private JButton searchButton;
     private JComboBox comboBox1;
     private JButton resetButton;
+    private JButton orderButton;
     private CustomersBLL customersBLL;
     private Mess mess;
 
@@ -54,6 +55,7 @@ public class CustomersGui extends JFrame{
         setUpdateButton();
         setDeleteButton();
         setSearchButton();
+        setOrderButton();
 
         //Set click table
         setClickTable();
@@ -240,6 +242,26 @@ public class CustomersGui extends JFrame{
                         table1.setModel(toTableModel(list));
                     }
                 }
+            }
+        });
+    }
+
+    private void setOrderButton() {
+        orderButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Integer row = table1.getSelectedRow();
+                if (row != null && row > -1) {
+                    List<Customers> list = customersBLL.searchCustomers(table1.getModel().getValueAt(row,0).toString(), 0);
+                    if(!list.isEmpty()) {
+                        Customers customers = list.get(0);
+                        BanHangGui banHangGui = new BanHangGui(customers);
+                    }
+                }
+                else {
+                    mess.message("Ordered customers", "No select to order");
+                }
+
             }
         });
     }

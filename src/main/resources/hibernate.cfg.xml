@@ -13,11 +13,11 @@
         <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
         <!-- Show all executed SQL to console -->
-        <mapping class="DAL.Category" />
-        <mapping class="DAL.Vegetable" />
-        <mapping class="DAL.Customers" />
-        <mapping class="DAL.Order" />
-        <!--mapping class="DAL.Orderdetail"/-->
+        <mapping class="DAL.Category"/>
+        <mapping class="DAL.Vegetable"/>
+        <mapping class="DAL.Customers"/>
+        <mapping class="DAL.Ordered"/>
+        <mapping class="DAL.Orderdetail"/>
         
     </session-factory>
 </hibernate-configuration>

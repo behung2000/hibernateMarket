@@ -77,4 +77,10 @@ public class VegetableBLL {
     public void update(Vegetable vegetable) {
         vegetableDAL.update(vegetable);
     }
+
+    public void updateAmount(Integer id, Integer quantity) {
+        Vegetable vegetable = getVegetable(id);
+        vegetable.setAmount(vegetable.getAmount()-quantity);
+        update(vegetable);
+    }
 }

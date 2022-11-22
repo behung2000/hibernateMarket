@@ -31,7 +31,7 @@ public class Customers {
     private String city;
 
     public String toString() {
-        return new Gson().toJson(this);
+        return this.fullname;
     }
 
 }
