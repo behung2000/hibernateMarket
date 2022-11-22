@@ -255,12 +255,11 @@ public class CustomersGui extends JFrame{
                     List<Customers> list = customersBLL.searchCustomers(table1.getModel().getValueAt(row,0).toString(), 0);
                     if(!list.isEmpty()) {
                         Customers customers = list.get(0);
-                        setVisible(false);
                         BanHangGui banHangGui = new BanHangGui(customers);
                     }
                 }
                 else {
-                    mess.message("Order customers", "No select to order");
+                    mess.message("Ordered customers", "No select to order");
                 }
 
             }

@@ -9,7 +9,7 @@ import java.util.List;
 
 public class CustomersBLL {
     private CustomersDAL customersDAL;
-    private Mess mess = new Mess();
+    private Mess mess;
 
     public CustomersBLL() {
         customersDAL = new CustomersDAL();
