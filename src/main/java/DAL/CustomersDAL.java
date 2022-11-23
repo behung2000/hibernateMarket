@@ -1,6 +1,5 @@
 package DAL;
 
-import jakarta.persistence.EntityManager;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

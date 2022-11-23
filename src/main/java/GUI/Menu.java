@@ -47,7 +47,7 @@ public class Menu extends JFrame{
         thongKeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                ThongKeGui thongKeGui = new ThongKeGui();
             }
         });
     }

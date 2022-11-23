@@ -78,4 +78,11 @@ public class VegetableDAL {
         session.update(vegetable);
         closeSession();
     }
+
+    public List getThongKeVegetable() {
+        openSession();
+        List list = session.createQuery("SELECT v.VegetableID, v.VegetableName, v.Amount, v.Price, SUM(od.quantity), SUM(od.price) FROM Vegetable AS v INNER JOIN Orderdetail AS od ON v.VegetableID=od.vegetableId GROUP BY v.VegetableID").list();
+        closeSession();
+        return list;
+    }
 }
