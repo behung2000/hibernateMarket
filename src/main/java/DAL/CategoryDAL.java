@@ -69,18 +69,13 @@ public class CategoryDAL {
         return category;
     }
 
-
-    /*
-    public void deleteVegetable(Vegetable vegetable) {
-        Category category = getCategory(vegetable.getCatagory().getCatagoryID());
-        Set<Vegetable> vegetables = category.getListVegetable();
-        if (vegetable != null) {
-            openSession();
-            vegetables.remove(vegetable);
-            closeSession();
-            System.out.println("Success");
-        }
+    public List getThongKeCategory() {
+        openSession();
+        List list = session.createQuery("SELECT c.CatagoryID, c.Name, SUM(od.quantity), SUM(od.price) FROM Category AS c INNER JOIN Vegetable AS v ON c.CatagoryID=v.catagory.id INNER JOIN Orderdetail AS od ON v.VegetableID=od.vegetableId GROUP BY c.CatagoryID").list();
+        closeSession();
+        return list;
     }
-     */
+
+
 
 }

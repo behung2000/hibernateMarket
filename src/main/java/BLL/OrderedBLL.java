@@ -5,20 +5,18 @@ import GUI.Mess;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class OrderedBLL {
-    private OrderDAL orderDAL;
+    private OrderedDAL orderDAL;
     private Mess mess;
 
     private VegetableBLL vegetableBLL;
 
     public OrderedBLL() {
-        orderDAL = new OrderDAL();
+        orderDAL = new OrderedDAL();
         mess = new Mess();
         vegetableBLL = new VegetableBLL();
     }
